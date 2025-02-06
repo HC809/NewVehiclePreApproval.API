@@ -1,5 +1,5 @@
 ﻿namespace NewVehiclePreApproval.Infrastructure.Exceptions;
-public sealed record PostgresExceptionDetails(
+public sealed record SqlServerExceptionDetails(
     int Status,
     string Type,
     string Title,

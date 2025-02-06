@@ -24,7 +24,7 @@ public static class DIContainer
 
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
+            options.UseSqlServer(connectionString);
         });
 
         services.AddScoped<IRequestRepository, RequestRepository>();
@@ -32,6 +32,6 @@ public static class DIContainer
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
 
         services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
-        services.AddSingleton<IPostgresExceptionMapper, PostgresExceptionMapper>();
+        services.AddSingleton<ISqlServerExceptionMapper, SqlServerExceptionMapper>();
     }
 }

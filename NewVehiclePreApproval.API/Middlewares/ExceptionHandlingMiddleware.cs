@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using NewVehiclePreApproval.Application.Exceptions;
 using NewVehiclePreApproval.Infrastructure.Exceptions;
-using Npgsql;
 
 namespace NewVehiclePreApproval.API.Middlewares;
 
@@ -10,9 +10,9 @@ public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionHandlingMiddleware> _logger;
-    private readonly IPostgresExceptionMapper _postgresExceptionMapper;
+    private readonly ISqlServerExceptionMapper _postgresExceptionMapper;
 
-    public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger, IPostgresExceptionMapper postgresExceptionMapper)
+    public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger, ISqlServerExceptionMapper postgresExceptionMapper)
     {
         _next = next;
         _logger = logger;
@@ -51,8 +51,8 @@ public class ExceptionHandlingMiddleware
                 validationException.Message,
                 validationException.Errors),
 
-            DbUpdateException dbUpdateException when dbUpdateException.InnerException is PostgresException postgresException
-                => MapPostgresExceptionToExceptionDetails(postgresException),
+            DbUpdateException dbUpdateException when dbUpdateException.InnerException is SqlException sqlExeption
+                => MapSqlServerExceptionToExceptionDetails(sqlExeption),
 
             _ => new ExceptionDetails(
                 StatusCodes.Status500InternalServerError,
@@ -63,9 +63,9 @@ public class ExceptionHandlingMiddleware
         }; ;
     }
 
-    private ExceptionDetails MapPostgresExceptionToExceptionDetails(PostgresException postgresException)
+    private ExceptionDetails MapSqlServerExceptionToExceptionDetails(SqlException sqlExeption)
     {
-        var postgresExceptionDetails = _postgresExceptionMapper.Map(postgresException);
+        var postgresExceptionDetails = _postgresExceptionMapper.Map(sqlExeption);
 
         return new ExceptionDetails(
             postgresExceptionDetails.Status,

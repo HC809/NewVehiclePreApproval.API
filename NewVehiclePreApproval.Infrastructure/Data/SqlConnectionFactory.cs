@@ -1,5 +1,5 @@
-﻿using NewVehiclePreApproval.Application.Abstractions.Data;
-using Npgsql;
+﻿using Microsoft.Data.SqlClient;
+using NewVehiclePreApproval.Application.Abstractions.Data;
 using System.Data;
 
 namespace NewVehiclePreApproval.Infrastructure.Data;
@@ -14,7 +14,7 @@ internal sealed class SqlConnectionFactory : ISqlConnectionFactory
 
     public IDbConnection CreateConnection()
     {
-        var connection = new NpgsqlConnection(_connectionString);
+        var connection = new SqlConnection(_connectionString);
         connection.Open();
 
         return connection;
