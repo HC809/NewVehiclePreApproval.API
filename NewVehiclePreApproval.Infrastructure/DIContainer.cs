@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NewVehiclePreApproval.Application.Abstractions.Data;
 using NewVehiclePreApproval.Domain.Abstractions;
+using NewVehiclePreApproval.Domain.Dealerships;
 using NewVehiclePreApproval.Domain.Requests;
 using NewVehiclePreApproval.Infrastructure.Data;
 using NewVehiclePreApproval.Infrastructure.Exceptions;
@@ -27,6 +28,7 @@ public static class DIContainer
             options.UseSqlServer(connectionString);
         });
 
+        services.AddScoped<IDealershipRepository, DealershipRepository>();
         services.AddScoped<IRequestRepository, RequestRepository>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
