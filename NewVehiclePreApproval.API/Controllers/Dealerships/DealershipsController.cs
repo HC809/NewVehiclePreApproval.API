@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NewVehiclePreApproval.Application.Dealerships.CreateDealership;
 using NewVehiclePreApproval.Application.Dealerships.DeleteDealership;
+using NewVehiclePreApproval.Application.Dealerships.GetDealerships;
 using NewVehiclePreApproval.Application.Dealerships.UpdateDealership;
 
 namespace NewVehiclePreApproval.API.Controllers.Dealerships;
@@ -16,6 +17,18 @@ public class DealershipsController : ControllerBase
     {
         _sender = sender;
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetDealerships(CancellationToken cancellationToken)
+    {
+        var query = new GetDealershipsQuery();
+        var result = await _sender.Send(query, cancellationToken);
+
+        if (result.IsFailure) return BadRequest(result.Error);
+
+        return Ok(result.Value);
+    }
+
 
     [HttpPost("create")]
     public async Task<IActionResult> CreateDealership(CreateDealershipRequest request, CancellationToken cancellationToken)
