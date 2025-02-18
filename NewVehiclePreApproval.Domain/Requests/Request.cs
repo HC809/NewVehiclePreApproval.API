@@ -15,6 +15,8 @@ public sealed class Request : Entity
         Status = RequestStatus.Pending;
     }
 
+    public string Test { get; private set; }
+
     public SellerInformation SellerInformation { get; private set; }
     public ClientInformation ClientInformation { get; private set; }
     public VehicleInformation VehicleInformation { get; private set; }

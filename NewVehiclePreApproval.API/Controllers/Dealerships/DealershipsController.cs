@@ -58,7 +58,7 @@ public class DealershipsController : ControllerBase
 
         var result = await _sender.Send(command, cancellationToken);
 
-        if (result.IsFailure) return NotFound(result.Error);
+        if (result.IsFailure) return BadRequest(result.Error);
 
         return Ok(result.Value);
     }
@@ -68,7 +68,7 @@ public class DealershipsController : ControllerBase
     {
         var command = new DeleteDealershipCommand(id);
         var result = await _sender.Send(command, cancellationToken);
-        if (result.IsFailure) return NotFound(result.Error);
+        if (result.IsFailure) return BadRequest(result.Error);
 
         return Ok(result.Value);
     }
