@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewVehiclePreApproval.Infrastructure;
 
@@ -11,9 +12,11 @@ using NewVehiclePreApproval.Infrastructure;
 namespace NewVehiclePreApproval.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250219004050_Add_User_Table")]
+    partial class Add_User_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,8 +162,6 @@ namespace NewVehiclePreApproval.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DealershipId");
-
                     b.HasIndex("Email")
                         .IsUnique();
 
@@ -297,15 +298,6 @@ namespace NewVehiclePreApproval.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("VehicleInformation")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("NewVehiclePreApproval.Domain.Users.User", b =>
-                {
-                    b.HasOne("NewVehiclePreApproval.Domain.Dealerships.Dealership", null)
-                        .WithMany()
-                        .HasForeignKey("DealershipId")
-                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

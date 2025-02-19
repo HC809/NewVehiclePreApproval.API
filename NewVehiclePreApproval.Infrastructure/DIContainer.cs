@@ -5,6 +5,7 @@ using NewVehiclePreApproval.Application.Abstractions.Data;
 using NewVehiclePreApproval.Domain.Abstractions;
 using NewVehiclePreApproval.Domain.Dealerships;
 using NewVehiclePreApproval.Domain.Requests;
+using NewVehiclePreApproval.Domain.Users;
 using NewVehiclePreApproval.Infrastructure.Data;
 using NewVehiclePreApproval.Infrastructure.Exceptions;
 using NewVehiclePreApproval.Infrastructure.Repositories;
@@ -30,6 +31,7 @@ public static class DIContainer
 
         services.AddScoped<IDealershipRepository, DealershipRepository>();
         services.AddScoped<IRequestRepository, RequestRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
 

@@ -11,21 +11,10 @@ internal sealed class DealershipConfiguration : IEntityTypeConfiguration<Dealers
         builder.ToTable("dealerships");
         builder.HasKey(dealership => dealership.Id);
 
-        builder.Property(dealership => dealership.Name)
-            .IsRequired()
-            .HasMaxLength(255);
-
-        builder.Property(dealership => dealership.Address)
-            .HasMaxLength(500); 
-
-        builder.Property(dealership => dealership.PhoneNumber)
-            .HasMaxLength(20);
-
-        builder.Property(dealership => dealership.Email)
-            .HasMaxLength(255);
-
-        //builder.Property(dealership => dealership.AdminUserId)
-        //    .IsRequired();
+        builder.Property(dealership => dealership.Name).IsRequired().HasMaxLength(255);
+        builder.Property(dealership => dealership.Address).HasMaxLength(500); 
+        builder.Property(dealership => dealership.PhoneNumber).HasMaxLength(20);
+        builder.Property(dealership => dealership.Email).HasMaxLength(255);
 
         // Índices
         builder.HasIndex(dealership => dealership.Email).IsUnique();
