@@ -96,7 +96,8 @@ internal class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Gui
 
     private string GenerateTemporaryPassword()
     {
-        var tempHashPassword = _passwordService.GetHashPassword(Guid.NewGuid().ToString().Substring(0, 8));
+        //var tempHashPassword = _passwordService.GetHashPassword(Guid.NewGuid().ToString().Substring(0, 8));
+        var tempHashPassword = Guid.NewGuid().ToString().Substring(0, 8);
         return tempHashPassword;
     }
 }
