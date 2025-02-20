@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NewVehiclePreApproval.Application.Abstractions.AppSettings;
 using NewVehiclePreApproval.Application.Abstractions.Data;
 using NewVehiclePreApproval.Domain.Abstractions;
 using NewVehiclePreApproval.Domain.Dealerships;
 using NewVehiclePreApproval.Domain.Requests;
 using NewVehiclePreApproval.Domain.Users;
+using NewVehiclePreApproval.Infrastructure.AppSettings;
 using NewVehiclePreApproval.Infrastructure.Data;
 using NewVehiclePreApproval.Infrastructure.Exceptions;
 using NewVehiclePreApproval.Infrastructure.Repositories;
@@ -16,6 +18,7 @@ public static class DIContainer
     public static IServiceCollection AddInfraestructure(this IServiceCollection services, IConfiguration configuration)
     {
         AddPersistence(services, configuration);
+        services.AddSingleton<IBusinessSettings>(new BusinessSettings(configuration));
 
         return services;
     }

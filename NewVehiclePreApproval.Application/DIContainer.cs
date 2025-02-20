@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using NewVehiclePreApproval.Application.Abstractions.Behaviors;
+using NewVehiclePreApproval.Application.Services;
 
 namespace NewVehiclePreApproval.Application;
 public static class DIContainer
@@ -14,6 +15,8 @@ public static class DIContainer
         });
 
         services.AddValidatorsFromAssembly(typeof(DIContainer).Assembly, includeInternalTypes: true);
+
+        services.AddSingleton<IPasswordService, PasswordService>();
 
         return services;
     }

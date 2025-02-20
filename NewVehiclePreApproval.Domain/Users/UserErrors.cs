@@ -38,4 +38,20 @@ public static class UserErrors
     public static readonly Error InvalidUserCredentials = new(
         "InvalidUserCredentials",
         "Las credenciales proporcionadas son incorrectas.");
+
+    public static readonly Error InvalidUserRole = new(
+        "InvalidUserRole",
+        "El rol especificado no es válido.");
+
+    public static readonly Error InvalidVerificationType = new(
+        "InvalidVerificationType",
+        "El tipo de verificación especificado no es válido.");
+
+    public static readonly Error InvalidDealershipAssignment = new(
+        "InvalidDealershipAssignment",
+        "No se puede asignar la concesionaria COFISA a un usuario con rol 'Administrador de Concesionaria'.");
+
+    public static readonly Error InvalidDealership = new(
+        "InvalidDealership",
+        "La concesionaria especificada no existe.");
 }

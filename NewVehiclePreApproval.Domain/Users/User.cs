@@ -8,7 +8,7 @@ public sealed class User : Entity
         string name,
         string email,
         Guid dealershipId,
-        string hashPassword,
+        string? hashPassword,
         UserRole role,
         VerificationType verificationType,
         bool isActive) : base(id)
@@ -25,17 +25,16 @@ public sealed class User : Entity
     public string Name { get; private set; }
     public string Email { get; private set; }
     public Guid DealershipId { get; private set; }
-    public string HashPassword { get; private set; }
+    public string? HashPassword { get; private set; }
     public UserRole Role { get; private set; }
     public VerificationType VerificationType { get; private set; }
     public bool IsActive { get; private set; }
 
     public static User Create(
-        Guid businessId,
         string name,
         string email,
         Guid dealershipId,
-        string hashPassword,
+        string? hashPassword,
         UserRole role,
         VerificationType verificationType,
         bool isActive)
@@ -45,7 +44,7 @@ public sealed class User : Entity
         return user;
     }
 
-    public void UpdateDetails(string name, string email, Guid dealershipId, string hashPassword, UserRole role, bool isActive)
+    public void UpdateDetails(string name, string email, Guid dealershipId, string? hashPassword, UserRole role, bool isActive)
     {
         Name = name;
         Email = email;

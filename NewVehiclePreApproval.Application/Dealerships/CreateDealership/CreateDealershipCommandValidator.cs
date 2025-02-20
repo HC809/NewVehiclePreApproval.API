@@ -25,10 +25,6 @@ internal class CreateDealershipCommandValidator : AbstractValidator<CreateDealer
         RuleFor(x => x.Email)
             .EmailAddress().WithMessage("El '{PropertyName}' debe ser un correo electrónico válido")
             .When(x => !string.IsNullOrEmpty(x.Email)) // Solo validar si hay un correo ingresado
-            .WithName("Correo Electrónico"); ;
-
-        //RuleFor(x => x.AdminUserId)
-        //    .NotEmpty().WithMessage(RequiredErrorMessage)
-        //    .WithName("Usuario Administrador");
+            .WithName("Correo Electrónico");
     }
 }
