@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NewVehiclePreApproval.Application.Users.CreateUser;
+using NewVehiclePreApproval.Application.Users.GetUsers;
 
 namespace NewVehiclePreApproval.API.Controllers.Users;
 
@@ -13,6 +14,15 @@ public class UsersController : ControllerBase
     public UsersController(ISender sender)
     {
         _sender = sender;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetUsers(CancellationToken cancellationToken)
+    {
+        var query = new GetUsersQuery();
+        var result = await _sender.Send(query, cancellationToken);
+
+        return result.IsSuccess ? Ok(result.Value) : NotFound();
     }
 
     [HttpPost("create")]
