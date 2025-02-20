@@ -23,4 +23,8 @@ public static class DealershipErrors
     public static readonly Error AdminUserNotAssigned = new(
         "AdminUserNotAssigned",
         "No se ha asignado un usuario administrador a la concesionaria.");
+
+    public static readonly Error CantDeleteDefaultDealership = new(
+        "CantDeleteDefaultDealership",
+        "No se puede eliminar la concesionaria COFISA porque es la concesionaria predeterminada.");
 }
